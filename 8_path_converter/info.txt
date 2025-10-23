@@ -1,0 +1,16 @@
+
+
+# Suppose you have created the API 
+
+in which you have to pass the "file URL" example "/var/www/html/project/media/text.txt" 
+
+this is you file opath and you have to upload into the API 
+
+But Directly fast APi cannot take as input 
+
+fastapi only get the data from the first / and after that the data does not match with any other URLS thats why its shows Unknown
+
+
+to fix this u have to just pass the "path"
+
+shown you in the example of main.py
