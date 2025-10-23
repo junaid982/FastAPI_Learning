@@ -1,0 +1,19 @@
+
+
+# Suppose you have a API 
+
+# /get/product/category/{category_name}
+
+
+# this is a dynamic category ,user can pass anything here in a str formate ,
+# but you have limited categories in your application 
+
+# if user passes correct catory then your application is working fine .
+# but what if user passes a category which you dont have . in this case typically you write a else block 
+
+
+# But in Fast API you can Predefine those categories only which need to be passed .
+
+and also write a specific operations on it 
+
+# Example are there in main.py 
