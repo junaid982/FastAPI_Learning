@@ -1,0 +1,14 @@
+
+
+Command to run the FastAPI
+>>> fastapi dev main.py 
+
+
+>> Auto generated Documentation
+
+http://127.0.0.1:8000/docs
+
+
+# Add  "/docs" to your main url all the API docs will show 
+
+# Add  "/redoc" to your main url all the API swagger docs will show 
