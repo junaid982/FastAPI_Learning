@@ -1,0 +1,16 @@
+
+
+# 1 - Issue with Interpreter 
+
+- Clearification
+    Sometimes VS code does not recognize the libraries 
+
+- Solution :
+    TO solve this Need to fix the Interpretter 
+
+    * ctrl + shift + p
+
+    # Write >>> Select Interpreter
+
+    # Select the path of the Interpreter which you are using 
+    

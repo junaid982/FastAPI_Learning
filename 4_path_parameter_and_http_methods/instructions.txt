@@ -1,0 +1,59 @@
+# Instructions for Setting Up and Running the Project
+
+Python Version: 3.11
+
+---
+
+1️⃣ Create a Virtual Environment
+
+# Windows
+>>> python -m venv env
+
+# Linux / MacOS
+>>> python3 -m venv env
+
+---
+
+2️⃣ Activate the Virtual Environment
+
+# Windows
+>>> env\Scripts\activate
+
+# Linux / MacOS
+>>> source env/bin/activate
+
+---
+
+3️⃣ Install Required Libraries
+
+# Make sure you have a requirements.txt file in your project folder
+>>> pip install -r requirements.txt
+
+---
+
+4️⃣ Run FastAPI Server
+
+# If your FastAPI app is called main.py and the FastAPI instance is 'app'
+# Use uvicorn to run
+
+# Windows / Linux
+
+>>> fastapi dev main.py
+
+
+>>> uvicorn main:app --reload --host 0.0.0.0 --port 8000
+
+# Notes:
+# --reload : auto-restarts server when code changes
+# --host 0.0.0.0 : allows access from any IP
+# --port 8000 : server port (can be changed)
+
+---
+
+5️⃣ Access API Documentation
+
+- Open your browser and navigate to:
+  http://localhost:8000/docs      # Swagger UI
+  http://localhost:8000/redoc     # ReDoc UI
+
+

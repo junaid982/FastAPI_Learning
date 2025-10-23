@@ -1,0 +1,58 @@
+
+
+API CRUD cURL
+
+1 = Add Product  ( POST Method Example )
+
+curl --location 'http://127.0.0.1:8000/add_product' \
+--header 'Content-Type: application/json' \
+--data '{
+    "product_name" : "moto",
+    "specification" : "moto edge 50 with good camera and curved screen",
+    "stock_count" : 100
+}'
+
+
+
+2 - Get App Products  ( GET Method Example )
+
+curl --location 'http://127.0.0.1:8000/products'
+
+
+
+
+
+3 - Get Specific product by id  ( GET Method Example )
+
+curl --location 'http://127.0.0.1:8000/products/11'
+
+
+
+
+4 - Update or replace the prduct ( PUT Method Example )
+
+curl --location --request PUT 'http://127.0.0.1:8000/update_product/11' \
+--header 'Content-Type: application/json' \
+--data '{
+        "product_name": "shoe Shock",
+        "specification": "The First Copy shoes",
+        "stock_count": 101
+    }'
+
+
+
+
+5 - Edit the product  ( PATCH Method Example )
+
+curl --location --request PATCH 'http://127.0.0.1:8000/edit_product/11' \
+--header 'Content-Type: application/json' \
+--data '{
+    "product_name" : "Motorola"
+}'
+
+
+
+
+6 -  Delete the product ( DELETE Method Example )
+
+curl --location --request DELETE 'http://127.0.0.1:8000/delete_product/10'
