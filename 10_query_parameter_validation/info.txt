@@ -1,7 +1,2 @@
 
 
-In this Example project we are going to learn how to use 
-1 - path parameter ( Django's dynamic url )
-2 - Query parameter
-3 - Status Code 
-

@@ -106,3 +106,37 @@ async def search_product(search : Annotated[str | None ,Query(max_length=5)] = N
                 return product
             
     return PRODUCTS
+
+
+
+
+
+# New Way for validation in query parameter with regex 
+
+# cURL
+'''
+
+http://127.0.0.1:8000/product/?search=usb
+
+http://127.0.0.1:8000/product/
+
+'''
+
+
+from typing import Annotated
+
+
+@app.get("/search/product/")
+async def search_product(search : Annotated[str | None ,Query(max_length=5 , pattern="^[a-z]+1$") , ] = None):
+
+    """
+    This API is used to seach ,
+    In This API we are going to show how we can use validation on Query Parameters with Annotated 
+    ( This is a new method we do  currently using in Fast API  Recommended by the Fast APi Team)
+    """
+    if search:
+        for product in PRODUCTS:
+            if search.lower() in str(product.get("title")).lower() or search.lower() in str(product.get("description")).lower():
+                return product
+            
+    return PRODUCTS
