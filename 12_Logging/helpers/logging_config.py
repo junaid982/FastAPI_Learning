@@ -18,6 +18,7 @@ def setup_logger():
     
     # 2 - Create handler
     stream_handler = logging.StreamHandler()   # Show logs in Terminal 
+    
     rotate_file_handler = RotatingFileHandler(
         log_file,
         maxBytes=1024*1024*2,   # Store only two MB file 
