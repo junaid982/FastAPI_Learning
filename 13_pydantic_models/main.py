@@ -123,3 +123,97 @@ async def create_user(user : UserModel):
 # 2 - Multiple Pydantic Models
 
 
+# In this Example we are going to lean how to take multiple of pydantic model 
+
+
+'''
+# Example curl
+
+
+curl 1  - api with all values
+
+curl -X 'POST' \
+  'http://127.0.0.1:8000/store/user' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "user_info": {
+    "name": "Junaid",
+    "email": "junaid@gmail.com",
+    "contact": 9876543567
+  },
+  "profesional_info": {
+    "emp_id": "emp1234",
+    "designation": "Software Engineer",
+    "location": "mumbai"
+  }
+}'
+
+
+
+
+curl 2  - to check empty and default values 
+
+curl --location 'http://127.0.0.1:8000/store/user' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "user_info": {
+    "name": "Junaid",
+    "email": "junaid@gmail.com"
+  },
+  "profesional_info": {
+    "emp_id": "emp123",
+    "designation": "Software Engineer"
+  }
+}'
+
+
+
+'''
+
+from pydantic import BaseModel
+
+USERS = []
+
+
+class UserInfo(BaseModel):
+    name : str
+    email : str | None = None # make Optional
+    contact : int  | None = None # Make Optional
+    
+class ProfessionalInfo(BaseModel):
+    emp_id : str
+    designation : str
+    location : str | None = "mumbai"
+    
+
+
+@app.post("/store/user")
+async def store_user(user_info : UserInfo , profesional_info : ProfessionalInfo):
+    """
+    This APi is used to take multiple request data 
+    """
+    
+    logger.info("API call started.")
+    logger.info("Creating Required Data to store .")
+    
+    # print(f"user_info : {dict(user_info)}")
+    # print(f"profesional_info : {dict(profesional_info)}")
+    user = {
+        "user_info" :user_info,
+        "profesional_info" : profesional_info
+    }
+    
+    print(f"user : {user}")
+    logger.info("Data Prepaired to store.")
+    
+    USERS.append(user)
+    logger.info("Data Stored to the USERS list.\n")
+    
+    
+    
+    return {
+        "message" : "Data stored to the list ",
+        "data" : USERS
+    }
+ 
