@@ -310,4 +310,69 @@ async def store_user_data(user : UserData):
     
     return user
 
+
+
+
+
+
+
+
+
+
+
+# ------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# 4 - Nested Pydantic Body
+
+# In this API We are going to learn how to take nested requesy body using Pydantic 
+
+# Example Curl
+'''
+curl -X 'POST' \
+  'http://127.0.0.1:8000/get/user/information' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "name": "Junaid Ansari",
+  "email": "Email",
+  "contact": "9876548765",
+  "prof_info": {
+    "emp_id": "emp1234",
+    "designation": "Software Engineer",
+    "role": "Team Lead",
+    "location": "mumbai"
+  }
+}'
+'''
+
+from pydantic import BaseModel
+
+
+class ProfInformation(BaseModel):
+    emp_id : str
+    designation : str
+    role : str | None = "Team Lead"
+    location : str | None = "mumbai"
+    
+class UserInformation(BaseModel):
+    name : str
+    email : str 
+    contact : str
+    prof_info : ProfInformation
+    
+
+@app.post("/get/user/information")
+async def get_user_information(user_info : UserInformation ):
+    
+    """
+    In this API we are going to learn how to take nested request body using Pydantic 
+    """
+    
+    logger.info("API Start and get the request json body \n")
  
+ 
+    return {
+        "message" : "success",
+        "data" : user_info
+    }
