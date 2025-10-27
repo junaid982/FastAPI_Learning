@@ -1,0 +1,6 @@
+2025-10-27 23:27:29,056 - FastAPI_Routing - INFO - routers.py - get_all_users : 26 - API call started  
+2025-10-27 23:27:29,056 - FastAPI_Routing - DEBUG - routers.py - get_all_users : 27 - All User Data as response
+  
+2025-10-27 23:27:53,456 - FastAPI_Routing - INFO - routers.py - get_all_users : 26 - API call started  
+2025-10-27 23:27:53,456 - FastAPI_Routing - DEBUG - routers.py - get_all_users : 27 - All User Data as response
+  

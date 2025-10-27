@@ -21,4 +21,3 @@ async def add_product(product : dict):
         "message" : "product addedd successfully"
     }
     
-    
