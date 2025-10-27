@@ -109,6 +109,7 @@ async def create_user(user : UserModel):
     This API is used to store the request user data into the list with typing validation with pydantic 
     """
     
+    logger.info("Storing User data from pydantic .\n")
     USERS.append(user)
     
     return {
@@ -216,4 +217,97 @@ async def store_user(user_info : UserInfo , profesional_info : ProfessionalInfo)
         "message" : "Data stored to the list ",
         "data" : USERS
     }
+
+
+
+
+
+
+
+
+ 
+# ------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# 3 - Pydantic Fields ( for better Validation)
+
+# Pydantic provides the Field Class from which we can validate the input values without custom logic 
+
+
+# Example curl
+'''
+curl -X 'POST' \
+  'http://127.0.0.1:8000/store/user/data' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "id": 1,
+  "name": "string",
+  "email": "string",
+  "contact": "5105140872",
+  "location": "mumbai"
+}'
+'''
+
+
+
+from pydantic import BaseModel , Field
+from enum import Enum
+from typing import Optional
+
+class LocationList(Enum):
+    mumbai = "mumbai"
+    chennai = "chennai"
+    banglore = "banglore"
+
+class UserData(BaseModel):
+    id : int = Field(
+        title="user id",
+        description="user unique id",
+        ge=1
+    )
+    
+    name : str = Field(
+        title="user name",
+        description="user name for identification",
+        min_length=2, # user name should not be less then 2 char
+        max_length=20 # user name should not be greater then 20 char
+    )
+    
+    email : str = Field(
+        title="user email",
+        description="user unique email for authentication",
+        min_length=5, # user email should not be less then 5 char 
+        max_length=50 # user email should not be greater then 50 char
+    )
+    
+    contact : str = Field(
+        title="user contact",
+        description="user unique contact for authentication",
+        pattern=r"^[0-9]{10}$"   # basic Reguler Expression for contact Validation ( pattern always applied on str type )
+    )
+    
+    location : str = Field(
+        title = "user location",
+        description="user working location",
+        default=LocationList.mumbai     # default keyword is used to add a default value
+        
+    ) 
+    
+    emp_id : str = Field(
+        default=None,       # default None make it optional
+        title="employee id",
+        description="Employee id "
+    ) 
+
+
+@app.post("/store/user/data")
+async def store_user_data(user : UserData):
+    """
+    In this API we are going to validate the request data values with pydantic Fields 
+    """
+    logger.info("using Pydantic Field to valilate request body data.\n")
+    
+    return user
+
  
