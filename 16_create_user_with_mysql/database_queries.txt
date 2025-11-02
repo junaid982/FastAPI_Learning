@@ -1,0 +1,91 @@
+
+# Users table 
+
+
+-- Table 2: new_users_role_master
+CREATE TABLE new_users_role_master (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    role VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+
+-- Insert values into new_users_role_master
+INSERT INTO new_users_role_master (role) VALUES
+('Super Admin'),
+('Admin'),
+('User');
+
+
+
+
+
+-- Table 3: new_users_designation_master
+CREATE TABLE new_users_designation_master (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    designation VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+
+-- Insert values into new_users_designation_master
+INSERT INTO new_users_designation_master (designation) VALUES
+('CRE'),
+('Team Lead'),
+('Associate Manager'),
+('Senior Manager'),
+('Quality'),
+('Jr Developer'),
+('Sr. Developer'),
+('Director');
+
+
+
+-- Table 1: new_users
+CREATE TABLE new_users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NULL,
+    opoid VARCHAR(100) NOT NULL,
+    role INT NOT NULL,
+    designation INT NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    is_active BOOLEAN DEFAULT TRUE,
+    is_delete BOOLEAN DEFAULT FALSE,
+    created_by INT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (role) REFERENCES new_users_role_master(id),
+    FOREIGN KEY (designation) REFERENCES new_users_designation_master(id)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
