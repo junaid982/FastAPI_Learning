@@ -152,12 +152,12 @@ async def login_user_api(user : UserData):
         
         
 
-@router.get("/logout")
+@router.post("/logout")
 async def logout():
     """
     This APi is used to logout user
     """
+    response = RedirectResponse(url="/" , status_code=303)
     
-    
-    return RedirectResponse(url="/")
+    return response
     
