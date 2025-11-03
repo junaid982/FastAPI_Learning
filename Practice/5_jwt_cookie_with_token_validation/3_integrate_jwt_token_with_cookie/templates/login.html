@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+</head>
+
+<body>
+
+    <h1>Login Page</h1>
+
+    <div>
+
+        <div>
+            <label for="username">Enter OPOID</label><br>
+            <input type="text" id="username">
+        </div>
+
+        <div>
+            <label for="password">Enter Password</label><br>
+            <input type="password" id="password">
+        </div>
+
+        <div>
+            <button onclick="LoginUser()">Login</button>
+        </div>
+    </div>
+
+
+
+    <script>
+        const login_api_url = "/api/auth/login";
+        
+
+
+        const username = document.getElementById("username")
+        const password = document.getElementById("password")
+
+        const LoginUser = async () => {
+
+
+            try {
+                const LoginData = {
+                    username: username.value,
+                    password: password.value
+                }
+
+                const response = await fetch(
+                    login_api_url,
+                    {
+                        method: "POST",
+                        headers: {
+                            "accept": "application/json",
+                            "content-type": "application/json"
+                        },
+                        body: JSON.stringify(LoginData)
+                    }
+                );
+                const data = await response.json()
+
+                if (response.ok) {
+
+                    alert(data.message)
+                    window.location.href = "/dashboard"
+                }
+                else {
+
+                    alert(data.message)
+                }
+
+            } catch {
+                alert("Unable to connect to the server.");
+            }
+
+
+        }
+
+
+    </script>
+
+</body>
+
+</html>
