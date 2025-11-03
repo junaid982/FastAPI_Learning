@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+
+<body>
+
+    <h1>Login</h1>
+
+    <div>
+        <div>
+            <input type="text" id="username" placeholder="Enter OPOID">
+
+        </div>
+        <div>
+
+            <input type="password" id="password" placeholder="Enter Password">
+        </div>
+        <div>
+
+            <input type="checkbox" id="show_pass"> <label for="show_pass">Show Password</label>
+        </div>
+        <div>
+            <Button onclick="LoginUser()">Login</Button>
+        </div>
+    </div>
+
+
+    <script>
+
+        const username = document.getElementById("username")
+        const password = document.getElementById("password")
+
+        const LoginUser = async () => {
+
+            const loginData = {
+                username: username.value,
+                password: password.value
+            }
+
+            response = await fetch("/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "accept": "application/json",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(loginData)
+            })
+            const data = await response.json();
+            console.log(data);
+
+            window.location.href = "/dashboard";
+
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
