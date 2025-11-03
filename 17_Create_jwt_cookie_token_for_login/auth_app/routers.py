@@ -133,8 +133,8 @@ async def user_login(user : UserData) :
                 )
                 
                 
-                response.set_cookie(access_token , httponly = True , max_age = 900 , secure = True)
-                response.set_cookie(refresh_token , httponly = True , max_age = 604800 , secure = True)
+                response.set_cookie(key="access_token" , value=access_token , httponly = True , max_age = 900 , secure = True)
+                response.set_cookie(key="refresh_token" , value=refresh_token , httponly = True , max_age = 604800 , secure = True)
                 
                 return response
         
@@ -149,3 +149,8 @@ async def user_login(user : UserData) :
     
 
 
+@router.get("/logout")
+async def logout_user(response: Response):
+    res = RedirectResponse(url="/", status_code=303)
+    res.delete_cookie("access_token")
+    return res

@@ -8,7 +8,13 @@
 <body>
     Dashboard Page
 
-    <button >Logout</button>
+    <button onclick="LogoutUser()">Logout</button>
 
+    <script>
+    async function LogoutUser() {
+      await fetch("/api/auth/logout");
+      window.location.href = "/";
+    }
+  </script>
 </body>
 </html>

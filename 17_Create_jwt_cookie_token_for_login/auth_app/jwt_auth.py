@@ -60,3 +60,18 @@ async def create_token(data : dict ,token_type : str ):
 
 
 
+
+
+
+
+# validate token 
+async def validate_token(token):
+    
+    payload = jwt.decode(token , key=ACCESS_TOKEN_KEY , algorithms=ALGORITH)
+    print(f"payload : {payload}" )
+    return payload
+
+
+# asyncio.run(validate_token("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJvcG9pZCI6Im9wbzExOTczOCIsImRlc2lnbmF0aW9uIjoiU3IuIERldmVsb3BlciIsInJvbGUiOiJTdXBlciBBZG1pbiIsImV4cCI6MTc2MjE2NTc3OX0.zXiRpjy_PiZ1zUXYZkGlsjH25cuJf1Ff0LiSPYSbfuo"))
+
+
