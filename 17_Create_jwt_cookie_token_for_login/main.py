@@ -1,12 +1,12 @@
 
-from fastapi import FastAPI
+from fastapi import FastAPI , Depends
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi import Request
 from fastapi.responses import RedirectResponse
 
 from auth_app.routers import router as auth_router
-from auth_app.jwt_auth import validate_token
+from auth_app.jwt_auth import validate_token 
 
 
 app = FastAPI(name = "Create JWT Token")
@@ -42,7 +42,6 @@ async def login_view(request : Request):
  
         if payload:
             return RedirectResponse(url="/dashboard" )
-        
         
     
     return templates.TemplateResponse("login.html" , {"request" : request})

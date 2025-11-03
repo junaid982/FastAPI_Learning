@@ -2,9 +2,11 @@
 
 import bcrypt
 import asyncio
-from jose import jwt
-
+from jose import jwt , ExpiredSignatureError , JWSError
+from fastapi import status
 from datetime import datetime , timedelta
+from fastapi import Request, Response , HTTPException
+
 
 # encrypt password 
 
@@ -36,8 +38,8 @@ async def verify_password(password , hash_password):
 ACCESS_TOKEN_KEY = "accesstokensecretkey1234"
 REFRESH_TOKEN_KEY = "refreshtokensecretkey1234"
 
-ACCESS_TOKEN_EXPIRE_MINUTES = 15
-REFRESH_TOKEN_EXPIRE_DAYS = 7
+ACCESS_TOKEN_EXPIRE_MINUTES = 1
+REFRESH_TOKEN_EXPIRE_DAYS = 2
 
 async def create_token(data : dict ,token_type : str ):
     
@@ -67,11 +69,13 @@ async def create_token(data : dict ,token_type : str ):
 # validate token 
 async def validate_token(token):
     
-    payload = jwt.decode(token , key=ACCESS_TOKEN_KEY , algorithms=ALGORITH)
-    print(f"payload : {payload}" )
-    return payload
+    try:
+        payload = jwt.decode(token , key=ACCESS_TOKEN_KEY , algorithms=ALGORITH)
+        return payload
 
-
-# asyncio.run(validate_token("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJvcG9pZCI6Im9wbzExOTczOCIsImRlc2lnbmF0aW9uIjoiU3IuIERldmVsb3BlciIsInJvbGUiOiJTdXBlciBBZG1pbiIsImV4cCI6MTc2MjE2NTc3OX0.zXiRpjy_PiZ1zUXYZkGlsjH25cuJf1Ff0LiSPYSbfuo"))
+    except ExpiredSignatureError:
+        return None
+    except JWSError:
+        return None
 
 
